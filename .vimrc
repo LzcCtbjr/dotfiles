@@ -1,6 +1,6 @@
 set number
 syntax on
-colorscheme morning
+colorscheme default
 
 filetype plugin on
 filetype indent on
