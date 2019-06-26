@@ -49,11 +49,13 @@ fi
 alias ll='ls -l'
 alias la='ls -A'
 
-#adds alias for feh for faster wallpaper switching
-alias randomWall='feh --randomize --bg-fill /home/vidhaat/Documents/UI/wallpapers/*'
-
 #adds alias for battery charge
 alias battery='upower -i /org/freedesktop/UPower/devices/battery_BAT0'
 
 #adds alias for adding dotfiles to a git repo
 alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
+#adds aliases for switching between themes with pywal
+alias colobird='wal -i ~/Documents/UI/wallpapers/wall.png -q --backend colorz'
+alias cologarden='wal -i ~/Documents/UI/wallpapers/garden.jpg -q --backend haishoku'
+alias colosphere='wal -i ~/Documents/UI/wallpapers/sphere.jpg -q'
