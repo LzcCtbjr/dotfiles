@@ -14,6 +14,8 @@
 ###################  Official part of settings       ######################
 ###########################################################################
 
+#restores the previously used wal theme
+exec --no-startup-id wal -R
 
 # All personal preferences are mentioned below the title personal settings
 # Here are all the standard i3 settings 
@@ -172,7 +174,7 @@ font pango:Noto Mono Regular 13
 
 ################### TERMINAL ######################
 
-bindsym $mod+Return exec gnome-terminal --hide-menubar;focus
+bindsym $mod+Return exec xterm -fa 'Monospace' -fs 14;focus
 
 ################### MENU ######################
 
@@ -231,20 +233,20 @@ popup_during_fullscreen smart
 
 ################### AUDIO ######################
 
+#for ALSA
+#bindsym XF86AudioRaiseVolume exec "amixer set Master '5%+'"
+#bindsym XF86AudioLowerVolume exec "amixer set Master '5%-'"
+#bindsym XF86AudioMute exec "amixer -D pulse set Master toggle"
+#bindsym XF86AudioPlay exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause" 
+#bindsym XF86AudioNext exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next" 
+#bindsym XF86AudioPrev exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
+#bindsym XF86AudioStop exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop"
 
-bindsym XF86AudioRaiseVolume exec "amixer -D pulse sset Master '5%+'"
-bindsym XF86AudioLowerVolume exec "amixer -D pulse sset Master '5%-'"
-bindsym XF86AudioMute exec "amixer -D pulse set Master toggle"
-bindsym XF86AudioPlay exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause" 
-bindsym XF86AudioNext exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next" 
-bindsym XF86AudioPrev exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
-bindsym XF86AudioStop exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop"
-
-
-################### BAR ######################
-
-# bar toggle, hide or show 
-bindsym $mod+b bar mode toggle
+#for pulseaudio
+exec-always pulseaudio --start
+bindsym XF86AudioRaiseVolume exec ~/Documents/Scripts/volumeUp.sh
+bindsym XF86AudioLowerVolume exec ~/Documents/Scripts/volumeDown.sh
+bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
 
 ################### BORDER ######################
 
@@ -272,14 +274,16 @@ exec unclutter
 
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 
-# DarkGrey background with white text - not focus grey background - black text
+set_from_resource $fg i3wm.color7 #f0f0f0
+set_from_resource $bg i3wm.color2 #f0f0f0
+
 # Windows decoration colors
 # class                 border  backgr. text    indicator
-client.placeholder      #dedbcc #dedbcc #000000
-client.background       #dedbcc #dedbcc #000000
-client.focused          #8888aa #8888aa #dedbcc #4A4A4A
-client.unfocused        #222222 #222222 #aaaaaa #222222
-client.focused_inactive #222222 #222222 #a9a9a9 #222222
+client.placeholder      $bg	$bg	#000000 $bg
+client.background       $bg	$bg	#000000 $bg
+client.focused          $fg	$fg	$fg	$fg
+client.unfocused        $bg	$bg 	#aaaaaa $bg
+client.focused_inactive $fg	$bg	#222222 $bg
 client.urgent           #4A4A4A #4A4A4A #f7f7f7 #4A4A4A
 
 #rofi
@@ -291,7 +295,7 @@ bindsym $mod+d exec --no-startup-id rofi -show run
 # Settings for I3 next gap git
 # https://github.com/Airblader/i3
 
-for_window [class="^.*"] border pixel 0
+for_window [class="^.*"] border pixel 10
 gaps inner 20
 gaps outer 10
 #smart_gaps on
@@ -345,8 +349,6 @@ mode "$mode_gaps_outer" {
 ###########################################################################
 ###################       C O M P T O N      ##############################
 ###########################################################################
-#if you want transparency on non-focused windows
-exec_always compton --config ~/.config/i3/compton.conf
 
 #wallpaper 
 exec --no-startup-id feh --randomize --bg-fill /home/vidhaat/Documents/UI/wallpapers/*
@@ -355,6 +357,4 @@ bindsym $mod+shift+Return exec i3lock -i /home/vidhaat/Documents/UI/wallpapers/w
 #brightness
 bindsym XF86MonBrightnessUp exec xbacklight -inc 2 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 2 # decrease screen brightness
-
-exec --no-startup-id lxsession
 exec --no-startup-id redshift 5500:3400
