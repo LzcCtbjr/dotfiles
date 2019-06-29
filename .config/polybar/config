@@ -20,16 +20,16 @@
 background = ${xrdb:color0:#222}
 background-alt = #444
 foreground = ${xrdb:color7:#222}
-foreground-alt = #555
+foreground-alt = ${xrdb:color2:#222}
 primary = #ffb52a
 secondary = #e60053
-alert = #bd2c40
+alert = ${xrdb:color6:#222}
 underline = ${xrdb:color6:#222}
 [bar/example]
 ;monitor = ${env:MONITOR:HDMI-1}
 width = 100%
-height = 35
-;offset-x = 12.5%
+height = 3%
+offset-x = 12.5%
 ;offset-y = 1%
 radius = 0
 fixed-center = true
@@ -51,9 +51,9 @@ font-0 = fixed:pixelsize=14;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=14;1
 
-modules-left = bspwm i3
+modules-left = i3
 modules-center = date
-modules-right = filesystem xbacklight pulseaudio xkeyboard memory cpu wlan eth battery temperature
+modules-right = xbacklight pulseaudio memory cpu wlan eth battery temperature
 
 ;wm-restack = bspwm
 ;wm-restack = i3
@@ -174,12 +174,16 @@ label-song-ellipsis = true
 
 [module/xbacklight]
 type = internal/xbacklight
+format-full-preffix-foreground = ${colors.foreground-alt}
 
 format = <label> <bar>
-label = BL
+format-prefix = "Backlight: "
+format-prefix-foreground = ${colors.foreground-alt}
+label = %percentage%% 
+format-underline = ${colors.underline}
 
 bar-width = 10
-bar-indicator = |
+bar-indicator = 
 bar-indicator-foreground = #fff
 bar-indicator-font = 2
 bar-fill = ─
@@ -268,11 +272,14 @@ label = %date% %time%
 type = internal/pulseaudio
 
 format-volume = <label-volume> <bar-volume>
-label-volume = VOL %percentage%%
+format-volume-prefix = "Volume: "
+format-volume-prefix-foreground = ${colors.foreground-alt}
+label-volume = %percentage%%
 label-volume-foreground = ${root.foreground}
-
-label-muted = 🔇 muted
-label-muted-foreground = #666
+format-volume-underline = ${colors.underline}
+label-muted = Muted
+label-muted-foreground = ${colors.foreground-alt}
+label-muted-underline = ${colors.underline}
 
 bar-volume-width = 10
 bar-volume-foreground-0 = #55aa55
@@ -283,7 +290,7 @@ bar-volume-foreground-4 = #55aa55
 bar-volume-foreground-5 = #f5a70a
 bar-volume-foreground-6 = #ff5555
 bar-volume-gradient = false
-bar-volume-indicator = |
+bar-volume-indicator = 
 bar-volume-indicator-font = 2
 bar-volume-fill = ─
 bar-volume-fill-font = 2
@@ -327,13 +334,18 @@ full-at = 98
 
 format-charging = <animation-charging> <label-charging>
 format-charging-underline = ${colors.underline}
+format-charging-prefix = "Battery: "
+format-charging-prefix-foreground = ${colors.foreground-alt}
 
 format-discharging = <animation-discharging> <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
+format-discharging-prefix = "Battery: "
+format-discharging-prefix-foreground = ${colors.foreground-alt}
 
-format-full-prefix = " "
+format-full-prefix = "Battery :"
 format-full-prefix-foreground = ${colors.foreground-alt}
 format-full-underline = ${self.format-charging-underline}
+format-full-preffix-foreground = ${colors.foreground-alt}
 
 ramp-capacity-0 = 
 ramp-capacity-1 = 
@@ -355,16 +367,16 @@ animation-discharging-framerate = 750
 [module/temperature]
 type = internal/temperature
 thermal-zone = 0
-warn-temperature = 60
+warn-temperature = 65
 
 format = <ramp> <label>
 format-underline = ${colors.underline}
 format-warn = <ramp> <label-warn>
-format-warn-underline = #f50a4d
+format-warn-underline = ${colors.alert}
 
 label = %temperature-c%
 label-warn = %temperature-c%
-label-warn-foreground = ${colors.secondary}
+label-warn-foreground = ${colors.alert}
 
 ramp-0 = 
 ramp-1 = 
