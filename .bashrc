@@ -44,7 +44,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 fi
-
+ 
 # some more ls aliases
 alias ll='ls -l'
 alias la='ls -A'
@@ -56,6 +56,13 @@ alias battery='upower -i /org/freedesktop/UPower/devices/battery_BAT0'
 alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 #adds aliases for switching between themes with pywal
-alias colobird='wal -i ~/Documents/UI/wallpapers/wall.png -q --backend colorz'
-alias cologarden='wal -i ~/Documents/UI/wallpapers/garden.jpg -q --backend haishoku'
-alias colosphere='wal -i ~/Documents/UI/wallpapers/sphere.jpg -q'
+alias colobird='wal -i ~/Documents/UI/wallpapers/wall.png -q --backend colorz
+wal_steam.py -w > /dev/null'
+alias colotransistor='wal -i ~/Documents/UI/wallpapers/transistor.jpg -q --backend wal
+wal_steam.py -w > /dev/null'
+alias coloxeno='wal -i ~/Documents/UI/wallpapers/xenoblade.jpg -q --backend wal
+wal_steam.py -w > /dev/null'
+alias colopurple='wal -i ~/Documents/UI/wallpapers/purple.png -q --backend wal
+wal_steam.py -w > /dev/null'
+alias coloroad='wal -i ~/Documents/UI/wallpapers/road.jpg -q --backend wal
+wal_steam.py -w > /dev/null'
